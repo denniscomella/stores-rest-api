@@ -1,3 +1,5 @@
+import os
+
 from flask import Flask
 from flask_restful import Api
 from flask_jwt import JWT
@@ -8,7 +10,7 @@ from resources.item import Item, ItemList
 from resources.store import Store, StoreList #imports model FROM resources (required)
 
 app = Flask(__name__)
-app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///data.db'
+app.config['SQLALCHEMY_DATABASE_URI'] = os.environ.get('DATABASE_URL', 'sqlite:///data.db') #works locally and on Heroku with 2 vars
 app.config['SQLALCHEMY_TRACK_MODIFICATION'] = False # only turns change tracking off for Flask module
 app.secret_key = 'poop'
 api = Api(app)
