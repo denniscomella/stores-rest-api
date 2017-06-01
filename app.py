@@ -13,10 +13,6 @@ app.config['SQLALCHEMY_TRACK_MODIFICATION'] = False # only turns change tracking
 app.secret_key = 'poop'
 api = Api(app)
 
-@app.before_first_request # flask method; eliminates need for create_tables.py
-def create_tables():
-    db.create_all() # creates all "app" stuff above, only tables that it sees (e.g. it's not imported)
-
 jwt = JWT(app, authenticate, identity)  # /auth
 
 # items = [] # unneeded after creation of item.py
